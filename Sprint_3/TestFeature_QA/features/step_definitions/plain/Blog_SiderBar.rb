@@ -15,7 +15,7 @@ Then /^user should see the Blog sidebar model$/ do
 end
 
 Then /^user should see "([^"]*)" label adjudicate to the number of comments$/ do |label|
-  page.wait_until
+  #page.wait_until
 #get matching xpath as array
   page.all(:xpath, "//div[@id='fw-sidebar']/div[8]/div[@class='fw-text']/div/div[2]").each do |eachpath|
     eachpath.text.should include(label)

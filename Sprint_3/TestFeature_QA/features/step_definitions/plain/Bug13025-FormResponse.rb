@@ -1,5 +1,5 @@
 Then /^user supply user "([^"]*)" and "([^"]*)"$/ do |username, password|
-  page.fill_in ("j_username", :with => username)
+  page.fill_in "j_username", :with => username
   page.fill_in "j_password", :with=>password
 end
 
