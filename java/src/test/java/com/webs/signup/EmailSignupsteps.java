@@ -33,7 +33,8 @@ public class EmailSignupsteps {
 	 public void openUrl(String url) {
 		this.currenturl=url;
 		int i = 0;
-		while (i<6){
+		//ryo is going to take chance...new signup page will adhoc display three mode 30%/30%/30% where is another 10%...
+		while (i<10){
 			++i;
 			startSeleniumSession(seleniumHost,seleniumPort,browser,url);
 			session().setTimeout("120000");
@@ -65,6 +66,7 @@ public class EmailSignupsteps {
 	@When("^I click on the green Get Started button$")
 		public void ClickonGetStarted() {
 		session().click("ui=PortalPage::streamlinegetStart()");
+		
 	}
 	
 	@Then("^I should remain on the home page$")
@@ -78,7 +80,33 @@ public class EmailSignupsteps {
      public void AssertredcrossEmail() {
 		//assert class attribute of email container
 		assertEquals("text_container invalid",session().getAttribute("//div[contains(@class,'gwo_streamlined_signup') and contains(@style,'display: block')]/descendant::div@class"));
-}
+	}
 
+	 @When("^I enter in an \"([^\"]*)\"$")
+	 public void EnterEmail(String email) {
+		 session().type("ui=PortalPage::SignupEmailText()", email);
+	 }
+	 
+	 @Then("^a ticker should appear on the right side of the Email field$")
+	 public void AssertgreencheckEmail() {
+			//assert class attribute of email container
+			assertEquals("text_container valid",session().getAttribute("//div[contains(@class,'gwo_streamlined_signup') and contains(@style,'display: block')]/descendant::div@class"));
+		}
+	 
+	 @When("^I enter password \"([^\"]*)\"$")
+              public void EnterPassword(String password) {
+		 session().type("ui=PortalPage::SignupPasswordText()", password);
+      }
 
+	 @Then("^I should be taken back to the home page$")
+	 		public void BackToHomePage() {
+		 	assertEquals(session().getLocation(),currenturl+"/");
+     }
+
+	 @Then("^the fields should be blank$")
+        	public void FieldsIsBlank() {
+		 session().waitForPageToLoad("30000");
+		 assertEquals("",session().getText("ui=PortalPage::SignupEmailText()"));
+		 assertEquals("",session().getText("ui=PortalPage::SignupPasswordText()"));
+	 }
 }
