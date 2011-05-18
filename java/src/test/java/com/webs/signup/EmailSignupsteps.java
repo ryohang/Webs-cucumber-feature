@@ -151,8 +151,8 @@ public class EmailSignupsteps {
 	 }
 
 	 @Then ("^I should see a message \"([^\"]*)\" bubble at the top$")
-	 @Pending
 	 	public void WebsIdCongratsMessage(String Message) {
+		 fail("this have not been implemented yet, put a fail statement for now");
 	 }
 	 
 	 @When("^I select \"([^\"]*)\" as Website type$")
