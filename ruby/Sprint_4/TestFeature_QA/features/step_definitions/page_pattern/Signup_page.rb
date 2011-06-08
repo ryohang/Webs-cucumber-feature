@@ -1,32 +1,31 @@
-class Signup
+class Signup < Portal
   include CommonPageOperation
   def assertnewpage(times,step1text)
-     $j=0
      $i=0
       while $i<times.to_i do
         if @session.find("//div[contains(@id,'step1')]/descendant::*/span[@class='signup_bulletitle']").text == (step1text) then
-           #@session.find("//div[@id='standardAccountFieldsWrapper3']/descendant::*/span[@class='signup_bulletitle']").text should have("Select a Template")
-           #@session.find("//div[@id='choose-pages']/descendant::*/span[@class='signup_bulletitle']").text should have("Choose Pages For Your Site")
-          break
+           break
         end
-           #TODO use portal method
-          while $j<10 do
-
-        #@Portalpage=Portal.new(@session)
-        #@Portalpage.noinfosignup(10)
-        #@Signup=@Portalpage.clickstarted_goto_signup
-            if @session.has_xpath?("//div[contains(@id,'get_started_block') and contains(@style,'display: block')]") then
-                @session.find("//div[@id='get_started_block']/descendant::input[@id='signup_button']").click
-                break
-              end
-            Capybara.app_host = "http://qa.members.webs.com"
-            @session.visit "/"
-            @session.reset!
-            $j+=1;
-          end
-          $i+=1;
-         end 
+          noinfosignup(10)
+          clickstarted_goto_signup
+        end 
   end
+  
+  def assertnewsignup_fromemailsignup(times,step1text,email,username,type)
+        $i=0
+      while $i<times.to_i do
+        if @session.find("//div[contains(@id,'step1')]/descendant::*/span[@class='signup_bulletitle']").text == (step1text) then
+           break
+        end
+          emailsignup(10)
+          #puts email
+          #puts username
+          fill_email(email)
+          fill_password(username)
+          select_webstype(type)
+          clickstarted_goto_signup
+        end  
+  end  
   
   def assertthreestep(step1text,step2text,step3text)
         @session.find("//div[contains(@id,'step1')]/descendant::*/span[@class='signup_bulletitle']").text.should eql (step1text) 
@@ -34,11 +33,43 @@ class Signup
         @session.find("//div[@id='choose-pages']/descendant::*/span[@class='signup_bulletitle']").text.should eql (step3text)
   end  
   
-  def fill_email(email)
-        @session.fill_in "//div[contains(@class,'gwo_streamlined_signup') and contains(@style,'display: block')]/descendant::input[@id='email_address']", :with =>email       
+  def fill_signupemail(email)
+        @session.fill_in "emailAddress", :with =>email       
   end
   
-  def fill_password(password)
-      @session.fill_in "//div[contains(@class,'gwo_streamlined_signup') and contains(@style,'display: block')]/descendant::input[@id='register_password']", :with => password  
+  def fill_signuppassword(password)
+      @session.fill_in "password", :with => password  
   end
+  
+  def fill_SiteAddressAndTitle(sitename)
+      @session.fill_in "siteAddress", :with => sitename 
+      @session.fill_in "siteTitle", :with => sitename  
+  end
+  
+  def assert_categorytype(type)
+      @session.find("//div[@id='site_categories_container']/label[@class='for_category selected']").text.should include(type)
+  end
+  
+  def select_template()
+      @session.find("//li[1]/div/a").click
+  end
+  
+  def select_pages()
+      @session.find("//div[contains(@id,'recommended_pages')]/child::*/li[2]").check("chosenTemplateIds")
+      @session.find("//div[contains(@id,'recommended_pages')]/child::*/li[4]").check("chosenTemplateIds")
+      @session.find("//div[contains(@id,'recommended_pages')]/child::*/li[4]").check("chosenTemplateIds")
+      @session.find("//div[contains(@id,'recommended_pages')]/child::*/li[4]").check("chosenTemplateIds")
+      @session.find("//div[contains(@id,'recommended_pages')]/child::*/li[5]").check("chosenTemplateIds")
+  end
+  
+  def clickregister_goto_coreg()
+      @session.find("//input[@id='register']").click
+      @Coreg=Coreg.new(@session)
+  end
+  
+  def loopfor_newsignup
+  
+  
+  end  
+  
 end
