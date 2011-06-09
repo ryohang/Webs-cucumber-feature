@@ -1,0 +1,5 @@
+default: -r features/support -r features/step_definitions/page_pattern -r features/step_definitions/module -r features/environments/plain.rb -r features/step_definitions/ features/feature --format pretty
+debug:   --format pretty 
+selenium: -r features/support -r features/step_definitions/page_pattern -r features/step_definitions/module -r features/environments/enhanced.rb -r features/step_definitions/ --format pretty 
+autotest: -r features/support -r features/environments/enhanced.rb -r features/pages/enhanced -r features/step_definitions/enhanced/Setting_steps.rb --format pretty features/feature/BlogSetting.feature
+autotest-all: -r features/support -r features/environments -r features/step_definitions -r features/pages features/feature --color --format progress --tags ~@selenium ~@mechanize
