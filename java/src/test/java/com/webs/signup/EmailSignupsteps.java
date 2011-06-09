@@ -9,7 +9,6 @@ import cuke4duke.annotation.Before;
 import cuke4duke.annotation.I18n.EN.When;
 import cuke4duke.annotation.I18n.EN.Given;
 import cuke4duke.annotation.I18n.EN.Then;
-import cuke4duke.annotation.Pending;
 
 public class EmailSignupsteps {
 	public static String seleniumHost;
@@ -18,6 +17,8 @@ public class EmailSignupsteps {
 	public static String webSite;
 	public String currenturl;
 	private String enteredEmail;
+	private String enteredpassword;
+	private String webtype;
 	
     @Before
     public void setUpClass() throws Exception {
@@ -89,7 +90,7 @@ public class EmailSignupsteps {
 	@When("^I click on the green Get Started button$")
 		public void ClickonGetStarted() {
 		session().click("ui=PortalPage::streamlinegetStart()");
-		
+
 	}
 	
 	 @When("^I click on the green Get Started button for original signup$")
@@ -124,6 +125,7 @@ public class EmailSignupsteps {
 	 
 	 @When("^I enter password \"([^\"]*)\"$")
               public void EnterPassword(String password) {
+		 this.enteredpassword=password;
 		 session().type("ui=PortalPage::SignupPasswordText()", password);
       }
 
@@ -142,6 +144,26 @@ public class EmailSignupsteps {
 	 @Then("^I should be taken to the \"([^\"]*)\" page$")
 	 	public void NavigateToDashboard(String FreeSignuptitle) {
 		 session().waitForPageToLoad("30000");
+			int i=0;
+			while (i<10){
+				++i;
+				if (session().isElementPresent("ui=NewSiteSignup::Signuptitle()")){
+					break;				
+				}
+				if (session().isElementPresent("ui=PortalPage::logoutButton()")){
+				session().click("ui=PortalPage::logoutButton()");
+				}
+				session().waitForPageToLoad("30000");
+				session().open("/");
+				session().waitForPageToLoad("30000");
+				EnterEmail(enteredEmail);
+				EnterPassword(enteredpassword);
+				if (webtype!=null){
+					SelectWebsiteType(webtype);
+				}
+				ClickonGetStarted();
+				session().waitForPageToLoad("30000");
+			}
 		 assertEquals(session().getText("ui=NewSiteSignup::Signuptitle()"),FreeSignuptitle);
        }
 
@@ -157,6 +179,7 @@ public class EmailSignupsteps {
 	 
 	 @When("^I select \"([^\"]*)\" as Website type$")
 	 public void SelectWebsiteType(String webtype) {
+		 this.webtype=webtype;
 		 session().click("//div[contains(@style,'display: block;')]/form[contains(@id,'signup')]/descendant::div[@class='select_selected']");
 		 session().click("//div[contains(@style,'display: block;')]/form[contains(@id,'signup')]/descendant::ul[@class='select_ul']/li[contains(text(),'"+webtype+"')]");
 	 }

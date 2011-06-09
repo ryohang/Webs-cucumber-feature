@@ -39,7 +39,7 @@ Scenario: Test entering in a valid email address and a valid password
 	When I click on the green Get Started button
 	Then I should be taken to the "Sign Up" page
 	And I should be logged into the email address I just entered
-	And I should see a message "" bubble at the top
+	#And I should see a message "" bubble at the top
 
 Scenario: Email Signup Click on the green Get Started button selecting a Website Type
 	Given an url "http://www.webs.com"
@@ -69,23 +69,23 @@ Scenario: Email Signup Click on the green Get Started button selecting a Website
 	Then I should be taken to the "Sign Up" page
 	And I should see "Personal" highlighted in Site Category
 	
-Scenario: Enter Website type in the signup
-	Given an url "http://www.webs.com" and opt to just website type
-	And I select "Business" as Website type
-	When I click on the green Get Started button for original signup
-	Then I should be taken to the "Sign Up" page
-	And I should see "Small Business/Prof." highlighted in Site Category
-	And I close the browser instant
-	Given an url "http://www.webs.com" and opt to just website type
-	And I select "Group/Organization" as Website type
-	When I click on the green Get Started button for original signup
-	Then I should be taken to the "Sign Up" page
-	And I should see "Groups/Orgs" highlighted in Site Category
-	And I close the browser instant
-	Given an url "http://www.webs.com" and opt to just website type
-	And I select "Personal" as Website type
-	When I click on the green Get Started button for original signup
-	Then I should be taken to the "Sign Up" page
-	And I should see "Personal" highlighted in Site Category
+#Scenario: Enter Website type in the signup
+#	Given an url "http://www.webs.com" and opt to just website type
+#	And I select "Business" as Website type
+#	When I click on the green Get Started button for original signup
+#	Then I should be taken to the "Sign Up" page
+#	And I should see "Small Business/Prof." highlighted in Site Category
+#	And I close the browser instant
+#	Given an url "http://www.webs.com" and opt to just website type
+#	And I select "Group/Organization" as Website type
+#	When I click on the green Get Started button for original signup
+#	Then I should be taken to the "Sign Up" page
+#	And I should see "Groups/Orgs" highlighted in Site Category
+#	And I close the browser instant
+#	Given an url "http://www.webs.com" and opt to just website type
+#	And I select "Personal" as Website type
+#	When I click on the green Get Started button for original signup
+#	Then I should be taken to the "Sign Up" page
+#	And I should see "Personal" highlighted in Site Category
 	
 	
