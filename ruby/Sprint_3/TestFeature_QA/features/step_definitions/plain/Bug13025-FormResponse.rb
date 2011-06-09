@@ -1,6 +1,9 @@
 Then /^user supply user "([^"]*)" and "([^"]*)"$/ do |username, password|
-  page.fill_in "j_username", :with => username
-  page.fill_in "j_password", :with=>password
+  page.within("//div[contains(@class,'clearfix sign_in_fields')]") do
+    page.fill_in "FWloginUsername", :with => username
+    page.evaluate_script("document.getElementById('FWloginPassword').focus()")
+    page.fill_in "FWloginPassword2", :with=> password
+  end
 end
 
 Then /^user click on "([^"]*)" to pop up username and password input box/ do |arg1|

@@ -6,5 +6,4 @@ Capybara.default_selector = :xpath
 
 
 
-
 # (e.g. rescue_action_in_public / rescue_responses / rescue_from)

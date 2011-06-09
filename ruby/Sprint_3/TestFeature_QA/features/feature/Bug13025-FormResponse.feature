@@ -1,5 +1,5 @@
 Feature: FormResponse_EmptyDropdown
-
+@selenium
 Scenario: QA_FormResponse action drop down value is not empty
     Given an url "http://qa.members.webs.com"
     When user click on "Sign In" to pop up username and password input box
@@ -8,7 +8,7 @@ Scenario: QA_FormResponse action drop down value is not empty
     When user visit "/s/community/messages"
     Then user should see value in "Actions:" dropdown list
     
-
+@selenium
 Scenario: Live_FormResponse action drop down value is not empty
     Given an url "http://members.webs.com"
     When user click on "Sign In" to pop up username and password input box
