@@ -52,6 +52,6 @@ Scenario Outline: Verify the new one page signup flow from webs.com main page
 
 Examples:
     |webstype||webscategory|
-    |"Please choose..."||"Small Business/Prof."|
+    |"Please choose..."||"Personal"|
     |" Group/Organization"||"Groups/Orgs"|
     |" Personal"||"Personal"|
