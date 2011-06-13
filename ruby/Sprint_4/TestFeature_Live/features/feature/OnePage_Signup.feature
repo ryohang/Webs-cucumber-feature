@@ -31,7 +31,7 @@ Scenario: Verify the new one page signup flow from webs.com main page
      When I click on Create My Website
      And I should see Co-Reg page with "ENHANCED" "PRO" package
      And I click "No Thanks, Continue"
-     Then I should be taken to "Site Builder"
+     Then I should be taken to "SITE BUILDER"
 
     
 @selenium
