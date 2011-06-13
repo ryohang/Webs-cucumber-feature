@@ -35,7 +35,7 @@ Scenario: Verify the new one page signup flow from webs.com main page
 
     
 @selenium
-Scenario Outline: Verify the new one page signup flow from webs.com main page
+Scenario Outline: Verify webs type has been selected in one page signup flow
      Given an url "http://www.webs.com"
      And I should see email page otherwise try 10 times
      And I fill up Email as "ryotestnewsignup" Gmail Password as "automationtest" with randow number
