@@ -25,7 +25,7 @@ Scenario Outline: User click on the sku link should redirect to the shopping car
      When user click on "Sign In" to pop up username and password input box
      Then user supply user <websid> and "automationtest"
      And user click on "Sign In" button
-     Then user will be prompted dropdown list "Select A Site"
+     Then user will be prompted dropdown list "SELECT A SITE"
      When user select "prm-1060autotest" site
      Then user should be redirected to "https://premium.members.webs.com/premium/checkout/oneStepCheckout"
      
